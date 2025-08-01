@@ -12,7 +12,7 @@ from langchain.schema import Document
 from langchain_google_genai import ChatGoogleGenerativeAI
 import requests
 from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api._api import TranscriptApi
+
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
@@ -21,16 +21,6 @@ os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 st.set_page_config(page_title="Ask-The-Video", layout="wide")
 st.title("🎬 ASK-THE-VIDEO")
 
-# Monkey patch requests.Session to use proxy
-class ProxiedSession(requests.Session):
-    def __init__(self, *args, **kwargs):
-        super(ProxiedSession, self).__init__(*args, **kwargs)
-        self.proxies = {
-            "http": "http://98.126.232.10:80",
-            "https": "http://98.126.232.10:80"
-        }
-
-TranscriptApi._TranscriptApi__session = ProxiedSession()
 
 def extract_video_id(url):
     try:
