@@ -10,6 +10,9 @@ from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from langchain_google_genai import ChatGoogleGenerativeAI
+import requests
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api._api import TranscriptApi
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
@@ -17,9 +20,6 @@ os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 
 st.set_page_config(page_title="Ask-The-Video", layout="wide")
 st.title("🎬 ASK-THE-VIDEO")
-import requests
-from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api._api import TranscriptApi
 
 # Monkey patch requests.Session to use proxy
 class ProxiedSession(requests.Session):
