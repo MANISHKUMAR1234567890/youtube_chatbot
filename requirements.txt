@@ -1,0 +1,16 @@
+streamlit
+youtube-transcript-api
+python-dotenv
+
+# LangChain and its components
+langchain
+langchain-community
+langchain-core
+langchain-google-genai
+
+# HuggingFace for embeddings
+transformers
+sentence-transformers
+
+# FAISS (CPU version)
+faiss-cpu
