@@ -44,8 +44,13 @@ with col1:
 with col2:
     if url and video_id:
         try:
+            proxies = {
+    "http": "http://98.126.232.10:80",
+    "https": "http://98.126.232.10:80"
+}
+
             
-            transcript_list = YouTubeTranscriptApi().fetch(video_id)
+            transcript_list = YouTubeTranscriptApi().fetch(video_id,  proxies=proxies)
             full_text = " ".join(chunk.text for chunk in transcript_list)
 
             
