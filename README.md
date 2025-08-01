@@ -2,9 +2,7 @@
 
 Ask any question about a YouTube video and get intelligent answers based on its transcript using Google Gemini and LangChain!
 
-![ASK-THE-VIDEO Banner](https://img.shields.io/badge/Streamlit-Ask%20the%20Video-red?style=for-the-badge&logo=streamlit)
 
----
 
 ## 🚀 Overview
 
