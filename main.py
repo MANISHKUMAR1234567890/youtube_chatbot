@@ -17,6 +17,21 @@ os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 
 st.set_page_config(page_title="Ask-The-Video", layout="wide")
 st.title("🎬 ASK-THE-VIDEO")
+import requests
+from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api._api import TranscriptApi
+
+# Monkey patch requests.Session to use proxy
+class ProxiedSession(requests.Session):
+    def __init__(self, *args, **kwargs):
+        super(ProxiedSession, self).__init__(*args, **kwargs)
+        self.proxies = {
+            "http": "http://98.126.232.10:80",
+            "https": "http://98.126.232.10:80"
+        }
+
+TranscriptApi._TranscriptApi__session = ProxiedSession()
+
 def extract_video_id(url):
     try:
         if "youtube.com/watch" in url:
@@ -44,13 +59,9 @@ with col1:
 with col2:
     if url and video_id:
         try:
-            proxies = {
-    "http": "http://98.126.232.10:80",
-    "https": "http://98.126.232.10:80"
-}
-
+          
             
-            transcript_list = YouTubeTranscriptApi().fetch(video_id,  proxies=proxies)
+            transcript_list = YouTubeTranscriptApi().fetch(video_id)
             full_text = " ".join(chunk.text for chunk in transcript_list)
 
             
